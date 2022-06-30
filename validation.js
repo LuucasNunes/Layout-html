@@ -7,6 +7,7 @@ function validar() {
     var senha = formUser.senha.value;
     var cpf = formUser.cpf.value;
     var cnpj = formUser.cnpj.value;
+	var confirmaSenha = formUser.confirmaSenha.value;
 
     if (nome == "" || nome.length < 3) {
         alert("Informe o nome completo!");
@@ -18,7 +19,7 @@ function validar() {
         formUser.email.focus();
         return false;
     }
-    if (telefone == "" || telefone.length < 11 || telefone.length > 11) {
+    if (telefone == "" || telefone.length < 16 || telefone.length > 16) {
         alert("Digite um número de telefone válido!");
         formUser.telefone.focus();
         return false;
@@ -54,6 +55,11 @@ function validar() {
             return false;
         }
     }
+	if(confirmaSenha != senha || confirmaSenha==""){
+		alert("a senha deve ser igual a mencionada");
+		formUser.confirmaSenha.focus();
+		return false;
+	}
 }
 
 function mascaraCPF(i) {
@@ -88,4 +94,15 @@ function mascaraTel(i) {
     if (v.length == 1 ) i.value = "+" + i.value;	
 	if (v.length ==5) i.value += " ";
 	if(v.length == 11) i.value += "-";
+}
+
+function lerImg(){
+	if(this.files && this.files[0]){
+		var file = new FileReader();
+		file.onload = function(e){
+			document.getElementById("preview").src 
+			= e.target.result;
+		}
+		file.readAsDataURL(this.files[0]);
+	}
 }
